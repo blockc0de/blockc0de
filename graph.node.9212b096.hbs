@@ -1,0 +1,73 @@
+<div class="node" data-node-id={{id}}>
+    <div class="none-toolbar">
+        <div class="node-title {{schema.NodeBlockType}}">
+            {{schema.FriendlyName}}
+        </div>
+        <div class="node-toolbar-icon delete-node">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+
+    <div class="node-parameters">
+        <div class="node-parameter-container in">
+            {{#if schema.CanBeExecuted}}
+                <div class="node-parameter execution">
+                    <div class="dot"></div>
+                    in
+                </div>
+            {{/if}}
+            {{#each schema.InParameters as |parameter|}}
+                <div class="node-parameter {{normalize parameter.ValueType}}" data-parameter-name="{{parameter.Name}}">
+                    <div class="dot"></div>
+                    {{parameter.Name}}
+                </div>
+            {{/each}}
+        </div>
+        <div class="node-parameter-container out">
+            {{#if schema.CanExecute}}
+                <div class="node-parameter execution">
+                    <div class="dot"></div>
+                    out
+                </div>
+            {{/if}}
+            {{#each schema.OutParameters as |parameter|}}
+                <div class="node-parameter {{normalize parameter.ValueType}}" data-parameter-name="{{parameter.Name}}">
+                    {{#if parameter.IsReference}}
+                        <div class="dot reference"></div>
+                    {{else}}
+                        <div class="dot"></div>
+                    {{/if}}
+                    {{parameter.Name}}
+                    {{#isParameterIsEditable parameter.ValueType}}
+                        {{#ifEquals ../schema.NodeBlockType "variable"}}
+                            <div>
+                                {{#ifEqualsNormalize parameter.ValueType "system-string"}}
+                                    {{#isSecretInput ../schema.IDEParameters}}
+                                        <input type="password" class="parameter-value-input" placeholder="..." spellcheck="false" no-drag="true" />
+                                    {{else}}
+                                        {{#isScriptInput ../schema.IDEParameters}}
+                                            <div class="script-editor" no-drag="true"></div>
+                                        {{else}}
+                                            <textarea spellcheck="false"  placeholder="..." class="parameter-value-input textarea" rows="5" no-drag="true"></textarea>
+                                        {{/isScriptInput}}
+                                    {{/isSecretInput}}
+                                {{else}}
+                                    <input type="text" class="parameter-value-input" placeholder="..." spellcheck="false" no-drag="true" />
+                                {{/ifEqualsNormalize}}
+                            </div>
+                        {{/ifEquals}}
+                    {{/isParameterIsEditable}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="special-actions">
+        {{#each schema.SpecialActionsAttributes as |action|}}
+            {{#ifEquals action.Type "open_url"}}
+                <div class="btn-classic" onclick="javascript: window.open('{{action.Parameter}}')">
+                    {{action.Text}}
+                </div>
+            {{/ifEquals}}
+        {{/each}}
+    </div>
+</div>
