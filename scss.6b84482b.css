@@ -579,16 +579,13 @@
 #graph-container .inner-container .node .node-parameters .node-parameter-container .node-parameter.system-string .dot {
   background-color: #00ff37;
 }
-#graph-container .inner-container .node .node-parameters .node-parameter-container .node-parameter.system-int32 .dot {
+#graph-container .inner-container .node .node-parameters .node-parameter-container .node-parameter.mapping .dot {
+  background-color: #dd71e0;
+}
+#graph-container .inner-container .node .node-parameters .node-parameter-container .node-parameter.list .dot {
   background-color: #ff7b00;
 }
-#graph-container .inner-container .node .node-parameters .node-parameter-container .node-parameter.system-int64 .dot {
-  background-color: #ff7b00;
-}
-#graph-container .inner-container .node .node-parameters .node-parameter-container .node-parameter.system-uint64 .dot {
-  background-color: #ff7b00;
-}
-#graph-container .inner-container .node .node-parameters .node-parameter-container .node-parameter.system-double .dot {
+#graph-container .inner-container .node .node-parameters .node-parameter-container .node-parameter.decimal .dot {
   background-color: #ff7b00;
 }
 #graph-container .inner-container .node .node-parameters .node-parameter-container .node-parameter.system-object .dot {
